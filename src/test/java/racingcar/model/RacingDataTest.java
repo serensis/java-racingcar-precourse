@@ -26,20 +26,18 @@ class RacingDataTest {
 
     @Test
     void setRacingCarlist_ShouldGenerateCarList() {
-        assertTrue(rc.getRacingCarlist().size() == 2);
-        assertTrue(rc.getRacingCarlist().get(1).getName().equals("test2"));
+        assertEquals(2, rc.getRacingCarlist().size());
+        assertEquals("test2", rc.getRacingCarlist().get(1).getName());
     }
 
     @Test
     void newRacingCar_catchException() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new RacingData("test1 test2");
-        });
+        assertThatIllegalArgumentException().isThrownBy(() -> new RacingData("test1 test2"));
     }
 
     @Test
     void newRacingCar_SuccessGen() {
-        assertThatNoException().isThrownBy(()->{ new RacingData("test1,test2");});
+        assertThatNoException().isThrownBy(()-> new RacingData("test1,test2"));
     }
 
     @Test
@@ -67,16 +65,21 @@ class RacingDataTest {
 
     @Test
     void setTrys_catchIllegalArguemntsException() {
-        assertThatIllegalArgumentException().isThrownBy(()->{
-            RacingData testLine = new RacingData("test1,test2");
-            testLine.setTrys("ggg");
-        });
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> {
+                    RacingData testLine = new RacingData("test1,test2");
+                    testLine.setTrys("ggg");
+                }
+        );
     }
 
     @Test
     void setTrys_SuccessNonExeption() {
-        assertThatNoException().isThrownBy(()->{
-            RacingData testLine = new RacingData("test1,test2");
-            testLine.setTrys("198");});
+        assertThatNoException().isThrownBy(
+                ()->{
+                    RacingData testLine = new RacingData("test1,test2");
+                    testLine.setTrys("198");
+                }
+        );
     }
 }
