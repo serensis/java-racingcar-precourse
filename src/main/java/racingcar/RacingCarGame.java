@@ -10,7 +10,37 @@ public class RacingCarGame {
     }
 
     public void runRacingCar() {
-        setRacingCars(getRacingCarList());
+        initRacaing();
+
+        int racingCount = racingController.getCount();
+
+        System.out.println("\n실행 결과");
+
+        while (racingCount > 0) {
+            racingController.runRacing();
+            racingController.showRacingStatus();
+            racingCount --;
+        }
+    }
+
+    private void initRacaing() {
+        setRacingCars();
+        setRacingTrackTry();
+    }
+
+    private void setRacingTrackTry() {
+        try {
+            racingController.setTryNumber(getRacingTrack());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setRacingTrackTry();
+        }
+    }
+
+    private String getRacingTrack() {
+        System.out.println("시도할 회수는 몇회인가요?");
+        String tryTotal = camp.nextstep.edu.missionutils.Console.readLine();
+        return tryTotal;
     }
 
     private String getRacingCarList() {
@@ -19,7 +49,12 @@ public class RacingCarGame {
         return list;
     }
 
-    private void setRacingCars(String list) {
-        racingController.setRacingCarLineUp(list);
+    private void setRacingCars() {
+        try {
+            racingController.setRacingCarLineUp(getRacingCarList());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setRacingCars();
+        }
     }
 }
