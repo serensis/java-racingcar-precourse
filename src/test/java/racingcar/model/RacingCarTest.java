@@ -34,8 +34,12 @@ class RacingCarTest {
     @Test
     void newRacingCar_catchException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            RacingCar test = new RacingCar("test1 test2");
+            new RacingCar("test1 test2");
         });
     }
 
+    @Test
+    void newRacingCar_SuccessGen() {
+        assertThatNoException().isThrownBy(()->{ new RacingCar("test1,test2");});
+    }
 }

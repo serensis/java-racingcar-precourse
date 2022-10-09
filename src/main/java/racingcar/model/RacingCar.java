@@ -9,7 +9,7 @@ public class RacingCar {
 
     public RacingCar(String list) throws IllegalArgumentException {
         if (! list.contains(",")) throw new IllegalArgumentException("빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
-        if (! list.contains(" ")) throw new IllegalArgumentException("빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
+        if (list.contains(" ")) throw new IllegalArgumentException("빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
         this.slist = list;
         setRacingCarlist();
     }
