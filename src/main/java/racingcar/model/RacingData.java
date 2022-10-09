@@ -10,16 +10,22 @@ public class RacingData {
     private int trys = 0;
 
     private int winnerDistance = 0;
+    private List<Car> winners;
 
     public int getTrys() {
         return trys;
     }
 
     public RacingData(String list) throws IllegalArgumentException {
-        if (! list.contains(",")) throw new IllegalArgumentException("[ERROR] 빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
-        if (list.contains(" ")) throw new IllegalArgumentException("[ERROR] 빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
+        checkError(list);
         this.slist = list;
         setRacingCarlist();
+        if (winners == null) winners = new ArrayList<>();
+    }
+
+    private void checkError(String str) {
+        if (!str.contains(",")) throw new IllegalArgumentException("[ERROR] ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
+        if (str.contains(" ")) throw new IllegalArgumentException("[ERROR] 빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
     }
 
     public List<Car> getRacingCarlist() {
@@ -31,8 +37,8 @@ public class RacingData {
         String[] cars = slist.split(",");
 
         for (String name: cars) {
-            Car racingcar = new Car(name);
-            racingCarlist.add(racingcar);
+            Car racingCar = new Car(name);
+            racingCarlist.add(racingCar);
         }
     }
 
@@ -51,16 +57,34 @@ public class RacingData {
         }
     }
 
-    public void setDistance(Car car) {
+    private void setDistance(Car car) {
         int diceN = camp.nextstep.edu.missionutils.Randoms.pickNumberInRange(0, 9);
         if (diceN > 3) {
             car.go();
-            if (car.getDistance() >= winnerDistance) {
-                winnerDistance = car.getDistance();
-            }
+        }
+        if (car.getDistance() != 0) setWinnerDistance(car.getDistance());
+    }
+
+    public void setWinnerDistance(int distance) {
+        if (distance >= winnerDistance) {
+            winnerDistance = distance;
         }
     }
+
     public int getWinnerDistance() {
         return winnerDistance;
+    }
+
+    public List<Car> getWinners() {
+        for (Car car: racingCarlist) {
+            setWinners(car);
+        }
+        return winners;
+    }
+
+    private void setWinners(Car c) {
+        if (c.getDistance() == winnerDistance) {
+            winners.add(c);
+        }
     }
 }

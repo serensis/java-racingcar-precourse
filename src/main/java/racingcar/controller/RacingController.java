@@ -24,4 +24,8 @@ public class RacingController {
     public int getCount() {
         return listup.getTrys();
     }
+
+    public void showWinners() {
+        RacingView.viewWinners(listup.getWinners());
+    }
 }

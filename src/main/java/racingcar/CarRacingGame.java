@@ -2,10 +2,10 @@ package racingcar;
 
 import racingcar.controller.RacingController;
 
-public class RacingCarGame {
+public class CarRacingGame {
     private RacingController racingController;
 
-    public RacingCarGame(RacingController controller) {
+    public CarRacingGame(RacingController controller) {
         this.racingController = controller;
     }
 
@@ -21,6 +21,12 @@ public class RacingCarGame {
             racingController.showRacingStatus();
             racingCount --;
         }
+
+        showWinners();
+    }
+
+    private void showWinners() {
+        racingController.showWinners();
     }
 
     private void initRacaing() {
@@ -44,7 +50,7 @@ public class RacingCarGame {
     }
 
     private String getRacingCarList() {
-        System.out.println("경주 할 자동차 이름(이름은 쉼표(,) 기준으로 구분)");
+        System.out.println("경주 할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String list = camp.nextstep.edu.missionutils.Console.readLine();
         return list;
     }
