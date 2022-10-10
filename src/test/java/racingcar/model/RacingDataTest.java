@@ -48,18 +48,8 @@ class RacingDataTest {
         testLine.setGoStops();
         testLine.setGoStops();
         testLine.setGoStops();
-        assertThat(testLine.getWinnerDistance()).isLessThan(4);
+        assertThat(testLine.getWinnerDistance()).isLessThan(5);
     }
-
-//    @Test
-//    void getWinnerDistance_afterEndGame_Fail() {
-//        RacingData testLine = new RacingData("test1,test3");
-//        testLine.setTrys("4");
-//        testLine.setGoStops();
-//        testLine.setGoStops();
-//        testLine.setGoStops();
-//        testLine.setGoStops();
-//    }
 
     @Test
     void setTrys_catchIllegalArguemntsException() {
