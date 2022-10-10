@@ -9,58 +9,58 @@ public class CarRacingGame {
         this.racingController = controller;
     }
 
-    public void runRacingCar() {
-        initRacaing();
-
-        int racingCount = racingController.getCount();
-
-        System.out.println("\n실행 결과");
-
-        while (racingCount > 0) {
-            racingController.runRacing();
-            racingController.showRacingStatus();
-            racingCount --;
-        }
-
+    public void runRacingCarGame() {
+        initRacing();
+        runRacing();
         showWinners();
     }
+
+    private void runRacing() {
+        System.out.println(Constans.MESSAGE_GAME_RESULT.getMessage());
+
+        for (int i = 0; i < racingController.getTryCount(); i++) {
+            racingController.runRacing();
+            racingController.showRacingStatus();
+        }
+    }
+
 
     private void showWinners() {
         racingController.showWinners();
     }
 
-    private void initRacaing() {
-        setRacingCars();
-        setRacingTrackTry();
+    private void initRacing() {
+        initRacingCars();
+        initRacingTry();
     }
 
-    private void setRacingTrackTry() {
+    private void initRacingTry() {
         try {
-            racingController.setTryNumber(getRacingTrack());
+            racingController.setTryNumber(inputRacingTrys());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            setRacingTrackTry();
+            initRacingTry();
         }
     }
-
-    private String getRacingTrack() {
-        System.out.println("시도할 회수는 몇회인가요?");
-        String tryTotal = camp.nextstep.edu.missionutils.Console.readLine();
-        return tryTotal;
-    }
-
-    private String getRacingCarList() {
-        System.out.println("경주 할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+    private String inputRacingCarList() {
+        System.out.println(Constans.MESSAGE_GAME_INPUT_CAR_LIST.getMessage());
         String list = camp.nextstep.edu.missionutils.Console.readLine();
         return list;
     }
 
-    private void setRacingCars() {
+    private String inputRacingTrys() {
+        System.out.println(Constans.MESSAGE_GAME_INPUT_TRY_NUMBER.getMessage());
+        String tryTotal = camp.nextstep.edu.missionutils.Console.readLine();
+        return tryTotal;
+    }
+
+
+    private void initRacingCars() {
         try {
-            racingController.setRacingCarLineUp(getRacingCarList());
+            racingController.setRacingCarLineUp(inputRacingCarList());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            setRacingCars();
+            initRacingCars();
         }
     }
 }

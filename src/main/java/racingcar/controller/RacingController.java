@@ -21,7 +21,7 @@ public class RacingController {
         RacingView.viewStatusRacing(listup);
     }
 
-    public int getCount() {
+    public int getTryCount() {
         return listup.getTrys();
     }
 

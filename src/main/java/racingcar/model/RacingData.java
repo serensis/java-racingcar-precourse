@@ -1,14 +1,14 @@
 package racingcar.model;
 
+import racingcar.Constans;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RacingData {
     private List<Car> racingCarlist;
-
     private String slist;
     private int trys = 0;
-
     private int winnerDistance = 0;
     private List<Car> winners;
 
@@ -18,23 +18,25 @@ public class RacingData {
 
     public RacingData(String list) throws IllegalArgumentException {
         checkError(list);
+
         this.slist = list;
         setRacingCarlist();
+
         if (winners == null) winners = new ArrayList<>();
     }
 
     private void checkError(String str) {
-        if (!str.contains(",")) throw new IllegalArgumentException("[ERROR] ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
-        if (str.contains(" ")) throw new IllegalArgumentException("[ERROR] 빈 문자열 없이 ',' 로 구분된 2개 이상의 레이싱카 목록을 입력해 주세요.");
+        if (!str.contains(Constans.DELEMITER.getMessage())) throw new IllegalArgumentException(Constans.ERROR_PREFIX.getMessage()+Constans.ERROR_LIST_INPUT_FORMAT.getMessage());
+        if (str.contains(Constans.EMPTYSTR.getMessage())) throw new IllegalArgumentException(Constans.ERROR_PREFIX.getMessage()+Constans.ERROR_LIST_INPUT_FORMAT.getMessage());
     }
 
     public List<Car> getRacingCarlist() {
         return racingCarlist;
     }
 
-    public void setRacingCarlist() {
+    private void setRacingCarlist() {
         racingCarlist = new ArrayList<>();
-        String[] cars = slist.split(",");
+        String[] cars = slist.split(Constans.DELEMITER.getMessage());
 
         for (String name: cars) {
             Car racingCar = new Car(name);
@@ -46,7 +48,7 @@ public class RacingData {
         try {
             this.trys = Integer.parseInt(parseInt);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 시도 횟수는 숫자여야 한다.");
+            throw new IllegalArgumentException(Constans.ERROR_PREFIX.getMessage()+Constans.ERROR_NUMBER_FORMAT.getMessage());
         }
     }
 

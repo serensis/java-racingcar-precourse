@@ -1,5 +1,7 @@
 package racingcar.model;
 
+import racingcar.Constans;
+
 import java.util.InputMismatchException;
 
 public class Car {
@@ -16,7 +18,7 @@ public class Car {
 
     private void setName(String name) throws ArrayIndexOutOfBoundsException {
         if (name.length() > 5) {
-            throw new IllegalArgumentException("[ERROR] 5자 미만의 이름으로 설정해야만 합니다.");
+            throw new IllegalArgumentException(Constans.ERROR_PREFIX.getMessage()+Constans.ERROR_MAXIMUM_LANGTH.getMessage());
         }
         this.name = name;
     }

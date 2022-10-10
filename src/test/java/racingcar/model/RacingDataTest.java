@@ -43,7 +43,6 @@ class RacingDataTest {
     @Test
     void getWinnerDistance_afterEndGame_Success() {
         RacingData testLine = new RacingData("test1,test3");
-        testLine.setRacingCarlist();
         testLine.setTrys("4");
         testLine.setGoStops();
         testLine.setGoStops();
@@ -55,7 +54,6 @@ class RacingDataTest {
 //    @Test
 //    void getWinnerDistance_afterEndGame_Fail() {
 //        RacingData testLine = new RacingData("test1,test3");
-//        testLine.setRacingCarlist();
 //        testLine.setTrys("4");
 //        testLine.setGoStops();
 //        testLine.setGoStops();
